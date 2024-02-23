@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public record NewEventDTO(
-        String titolo,
+        String title,
         String description,
         LocalDate date,
         String location,
