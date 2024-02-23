@@ -44,7 +44,7 @@ public class EventService {
         newEvent.setDescription(body.getDescription());
         newEvent.setDate(body.getDate());
         newEvent.setLocation(body.getLocation());
-        newEvent.setAvailableSeats(body.getAvailableSeats() - body.getUsers().size());
+        newEvent.setAvailableSeats(body.getAvailableSeats());
         Event event = eventRepo.findById(id).orElseThrow(() -> new NotFoundException(id));
         newEvent.setUsers(event.getUsers());
         return eventRepo.save(newEvent);
