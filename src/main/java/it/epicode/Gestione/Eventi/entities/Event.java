@@ -1,6 +1,5 @@
 package it.epicode.Gestione.Eventi.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +21,6 @@ public class Event {
     private LocalDate date;
     private String location;
     private Integer availableSeats;
-    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "user_event", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id"))

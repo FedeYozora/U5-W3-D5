@@ -54,6 +54,7 @@ public class UserService {
             Event eventId = eventService.findById(event.getId());
             if (eventId != null && eventId.getAvailableSeats() > 0) {
                 eventoDisponibile.add(event);
+                eventId.setAvailableSeats(eventId.getAvailableSeats() - eventId.getUsers().size());
             } else {
                 throw new NoSeatsException("The event with ID " + event.getId() + " does not have any seats left.");
             }
