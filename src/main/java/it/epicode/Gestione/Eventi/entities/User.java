@@ -1,6 +1,7 @@
 package it.epicode.Gestione.Eventi.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import it.epicode.Gestione.Eventi.enums.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -18,6 +19,7 @@ import java.util.UUID;
 @Setter
 @Getter
 @NoArgsConstructor
+@JsonIgnoreProperties({"password", "enabled", "events", "accountNonLocked", "credentialsNonExpired", "accountNonExpired"})
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
