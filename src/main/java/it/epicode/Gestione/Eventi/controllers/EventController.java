@@ -4,11 +4,13 @@ import it.epicode.Gestione.Eventi.entities.Event;
 import it.epicode.Gestione.Eventi.entities.User;
 import it.epicode.Gestione.Eventi.payloads.NewEventDTO;
 import it.epicode.Gestione.Eventi.service.EventService;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -35,8 +37,12 @@ public class EventController {
     @PostMapping
     @PreAuthorize("hasAuthority('ORGANIZZATORE')")
     @ResponseStatus(HttpStatus.CREATED)
-    public Event saveEvent(@RequestBody NewEventDTO newEventDTO) throws IOException {
-        return eventService.save(newEventDTO);
+    public Event saveEvent(@RequestBody NewEventDTO newEventDTO, BindingResult validation) throws IOException {
+        if (validation.hasErrors()) {
+            throw new BadRequestException();
+        } else {
+            return eventService.save(newEventDTO);
+        }
     }
 
     @PutMapping("/{id}")
